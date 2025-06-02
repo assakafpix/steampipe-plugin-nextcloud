@@ -1,8 +1,0 @@
-[
-  {
-    "arn": "{{ output.resource_aka.value }}",
-    "group_name": "{{ resourceName }}",
-    "parent_group_name": "parent{{ resourceName }}",
-    "version": "{{ output.version.value }}"
-  }
-]

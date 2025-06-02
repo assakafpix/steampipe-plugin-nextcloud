@@ -1,9 +1,0 @@
-[
-  {
-    "arn": "{{ output.resource_arn.value }}",
-    "email": "{{ output.resource_email.value }}",
-    "id": "{{ output.resource_id.value }}",
-    "name": "{{ output.resource_name.value }}",
-    "status": "{{ output.resource_status.value }}"
-  }
-]

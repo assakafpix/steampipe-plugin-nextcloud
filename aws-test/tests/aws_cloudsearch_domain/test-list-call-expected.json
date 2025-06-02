@@ -1,6 +1,0 @@
-[
-	{
-		"arn": "{{ output.resource_aka.value }}",
-		"domain_name": "{{ resourceName }}"
-	}
-]

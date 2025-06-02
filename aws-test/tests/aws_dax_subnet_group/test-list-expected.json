@@ -1,8 +1,0 @@
-[
-  {
-    "description": "{{ resourceName }}",
-    "region": "{{ output.aws_region.value }}",
-    "subnet_group_name": "{{ resourceName }}",
-    "vpc_id": "{{ output.vpc_id.value }}"
-  }
-]

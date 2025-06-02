@@ -1,7 +1,0 @@
-[
-  {
-    "cluster_id": "{{ output.resource_id.value }}",
-    "instance_fleet_type": "MASTER",
-    "provisioned_on_demand_capacity": 1
-  }
-]

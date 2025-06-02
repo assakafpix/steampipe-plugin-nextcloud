@@ -1,7 +1,0 @@
-[
-  {
-    "arn": "{{ output.resource_aka.value }}",
-    "log_group_name": "{{ resourceName }}",
-    "name": "{{ resourceName }}"
-  }
-]

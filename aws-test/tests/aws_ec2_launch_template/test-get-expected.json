@@ -1,6 +1,0 @@
-[
-  {
-    "launch_template_id": "{{ output.resource_id.value }}",
-    "launch_template_name": "{{ resourceName }}"
-  }
-]

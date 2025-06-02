@@ -1,8 +1,0 @@
-[
-  {
-    "arn": "{{output.resource_aka.value}}",
-    "instance_type": "stream.standard.small",
-    "name": "{{resourceName}}",
-    "state": "{{output.resource_state.value}}"
-  }
-]

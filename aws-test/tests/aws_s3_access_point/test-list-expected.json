@@ -1,6 +1,0 @@
-[
-	{
-		"access_point_arn": "{{ output.arn.value }}",
-		"name": "{{ resourceName }}"
-	}
-]

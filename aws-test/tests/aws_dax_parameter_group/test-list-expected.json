@@ -1,7 +1,0 @@
-[
-  {
-    "description": "{{ resourceName }}",
-    "parameter_group_name": "{{ resourceName }}",
-    "region": "{{ output.aws_region.value }}"
-  }
-]

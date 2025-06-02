@@ -1,6 +1,0 @@
-[
-  {
-    "logical_resource_id": "myVpc",
-    "stack_name": "{{resourceName}}"
-  }
-]

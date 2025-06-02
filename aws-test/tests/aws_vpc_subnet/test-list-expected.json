@@ -1,6 +1,0 @@
-[
-  {
-    "subnet_arn": "{{ output.resource_aka.value }}",
-    "subnet_id": "{{ output.resource_id.value }}"
-  }
-]

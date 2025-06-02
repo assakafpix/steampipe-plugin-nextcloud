@@ -1,7 +1,0 @@
-[
-  {
-    "akas": [
-      "{{ output.execution_arn.value }}"
-    ]
-  }
-]

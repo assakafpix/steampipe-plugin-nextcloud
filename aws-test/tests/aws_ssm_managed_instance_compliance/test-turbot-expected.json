@@ -1,6 +1,0 @@
-[
-  {
-    "akas": ["{{ output.arn.value }}"],
-    "title": "{{ output.compliance_id.value }}"
-  }
-]

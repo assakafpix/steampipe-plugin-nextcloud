@@ -1,6 +1,0 @@
-[
-  {
-    "fargate_profile_arn": "{{ output.resource_aka.value }}",
-    "fargate_profile_name": "{{ resourceName }}"
-  }
-]

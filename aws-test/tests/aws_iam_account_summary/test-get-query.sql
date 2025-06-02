@@ -1,2 +1,0 @@
-select account_id, account_mfa_enabled, account_signing_certificates_present, region
-from aws.aws_iam_account_summary;

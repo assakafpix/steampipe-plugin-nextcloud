@@ -1,7 +1,0 @@
-[
-  {
-    "addon_name": "vpc-cni",
-    "arn": "{{ output.resource_aka.value }}",
-    "status": "ACTIVE"
-  }
-]

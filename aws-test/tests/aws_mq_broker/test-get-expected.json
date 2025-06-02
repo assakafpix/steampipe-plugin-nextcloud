@@ -1,7 +1,0 @@
-[
-  {
-    "arn": "{{ output.resource_arn.value }}",
-    "broker_id": "{{ output.resource_id.value }}",
-    "broker_name": "{{ resourceName }}"
-  }
-]

@@ -1,6 +1,0 @@
-[
-  {
-    "arn": "{{ output.resource_aka.value }}",
-    "destination_id": "{{ output.resource_id.value }}"
-  }
-]

@@ -1,6 +1,0 @@
-[
-  {
-    "allocation_id": "{{ output.resource_id.value }}",
-    "public_ip": "{{ output.public_ip.value }}"
-  }
-]

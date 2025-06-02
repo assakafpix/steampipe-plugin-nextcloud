@@ -1,6 +1,0 @@
-[
-  {
-    "cluster_identifier": "{{ output.resource_name.value }}",
-    "snapshot_identifier": "{{ output.resource_name.value }}"
-  }
-]

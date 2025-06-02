@@ -1,5 +1,0 @@
-[
-  {
-    "alias_name": "alias/my-key-alias_{{ resourceName }}"
-  }
-]

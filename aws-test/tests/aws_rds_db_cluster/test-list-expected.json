@@ -1,7 +1,0 @@
-[
-  {
-    "arn": "{{ output.resource_aka.value }}",
-    "db_cluster_identifier": "{{resourceName}}",
-    "resource_id": "{{ output.resource_id.value }}"
-  }
-]

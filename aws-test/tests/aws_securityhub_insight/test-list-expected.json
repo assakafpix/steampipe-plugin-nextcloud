@@ -1,7 +1,0 @@
-[
-  {
-   "arn": "{{ output.insight_arn.value }}",
-   "group_by_attribute": "{{ output.group_by_att.value }}",
-   "name": "{{ output.name.value }}"
-  }
-]

@@ -1,9 +1,0 @@
-[
-  {
-    "region": "{{ output.region_name.value }}",
-    "status": "AVAILABLE",
-    "workgroup_arn": "{{ output.resource_aka.value }}",
-    "workgroup_id": "{{ output.resource_id.value }}",
-    "workgroup_name": "{{ resourceName }}"
-  }
-]

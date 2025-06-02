@@ -1,9 +1,0 @@
-[
-  {
-    "akas": [
-      "{{ output.arn.value }}"
-    ],
-    "hub_arn": "{{ output.arn.value }}",
-    "region": "{{ output.aws_region.value }}"
-  }
-]

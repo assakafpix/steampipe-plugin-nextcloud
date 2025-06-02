@@ -1,3 +1,0 @@
-select hosted_zone_id
-from aws_route53_vpc_association_authorization
-where hosted_zone_id = 'UNKNOWN_ZONE_ID'

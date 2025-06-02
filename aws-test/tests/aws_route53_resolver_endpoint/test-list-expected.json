@@ -1,8 +1,0 @@
-[
-  {
-    "akas": ["{{ output.resource_aka.value }}"],
-    "id": "{{ output.resource_id.value }}",
-    "ip_address_count": 3,
-    "name": "{{ resourceName }}"
-  }
-]

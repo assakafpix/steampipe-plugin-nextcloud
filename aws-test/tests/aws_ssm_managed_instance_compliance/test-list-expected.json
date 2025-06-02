@@ -1,7 +1,0 @@
-[
-  {
-    "id": "{{ output.compliance_id.value }}",
-    "resource_id": "{{ output.resource_id.value }}",
-    "status": "{{ output.status.value }}"
-  }
-]

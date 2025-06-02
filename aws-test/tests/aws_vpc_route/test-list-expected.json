@@ -1,6 +1,0 @@
-[
-  {
-    "route_table_id": "{{output.resource_id.value}}",
-    "title": "{{output.turbot_title.value}}"
-  }
-]

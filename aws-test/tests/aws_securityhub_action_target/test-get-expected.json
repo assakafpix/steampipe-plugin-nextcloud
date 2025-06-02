@@ -1,6 +1,0 @@
-[
-  {
-    "name": "{{ output.name.value }}",
-    "region": "{{ output.aws_region.value }}"
-  }
-]

@@ -1,8 +1,0 @@
-[
-  {
-    "launch_template_name": "{{ resourceName }}",
-    "tags": {
-      "Name": "{{ resourceName }}"
-    }
-  }
-]

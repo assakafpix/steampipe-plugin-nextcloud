@@ -1,6 +1,0 @@
-[
-	{
-		"db_proxy_arn": "{{ output.resource_aka.value }}",
-		"db_proxy_name": "{{resourceName}}"
-	}
-]

@@ -1,7 +1,0 @@
-[
-  {
-    "arn": "{{ output.resource_aka.value }}",
-    "cust_subscription_id": "{{resourceName}}",
-    "enabled": false
-  }
-]

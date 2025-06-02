@@ -1,6 +1,0 @@
-[
-	{
-		"image_id": "{{ output.image_id.value }}",
-		"instance_id": "{{ output.resource_id.value }}"
-	}
-]

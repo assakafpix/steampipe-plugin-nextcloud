@@ -1,7 +1,0 @@
-[
-	{
-		"catalog_id": "{{ output.aws_account.value }}",
-		"description": "integration testing",
-		"name": "{{ resourceName }}"
-	}
-]

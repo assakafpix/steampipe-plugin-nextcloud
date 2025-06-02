@@ -1,9 +1,0 @@
-[
-  {
-    "address_family": "{{ output.address_family.value }}",
-    "arn": "{{ output.arn.value }}",
-    "id": "{{ output.id.value }}",
-    "name": "{{ resourceName }}",
-    "owner_id": "{{ output.owner_id.value }}"
-  }
-]

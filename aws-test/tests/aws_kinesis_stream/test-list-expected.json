@@ -1,7 +1,0 @@
-[
-  {
-    "stream_arn": "{{ output.resource_aka.value }}",
-    "stream_name": "{{ resourceName }}",
-    "stream_status": "ACTIVE"
-  }
-]

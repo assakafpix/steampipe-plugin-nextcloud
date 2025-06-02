@@ -1,8 +1,0 @@
-[
-	{
-		"id": "{{ output.id.value }}",
-		"name": "{{ resourceName }}",
-		"type": "A",
-		"version": "{{ output.version.value }}"
-	}
-]

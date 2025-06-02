@@ -1,6 +1,0 @@
-[
-  {
-    "name": "{{ resourceName }}",
-    "title": "{{ resourceName }}"
-  }
-]

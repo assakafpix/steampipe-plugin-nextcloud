@@ -1,7 +1,0 @@
-[
-  {
-    "arn": "{{ output.resource_aka.value}}:$LATEST",
-    "function_name": "{{resourceName}}",
-    "version": "$LATEST"
-  }
-]

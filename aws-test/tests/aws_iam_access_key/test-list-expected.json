@@ -1,7 +1,0 @@
-[
-  {
-    "access_key_id": "{{ output.resource_id.value }}",
-    "status": "Active",
-    "user_name": "{{ output.user_name.value }}"
-  }
-]

@@ -145,15 +145,13 @@ func GetConfig(conn *plugin.Connection) *NextcloudConfig {
 	if conn == nil || conn.Config == nil {
 		return &NextcloudConfig{}
 	}
-	switch cfg := conn.Config.(type) {
-	case *NextcloudConfig:
-		return cfg
-	case NextcloudConfig:
+	cfg, ok := conn.Config.(NextcloudConfig)
+	if ok {
 		return &cfg
-	default:
-		// En cas d’autre type (imprévu), retourner une config vide pour éviter le panic
-		return &NextcloudConfig{}
 	}
+
+	// fallback par sécurité
+	return &NextcloudConfig{}
 }
 
 // GetClient construit et retourne un NextcloudClient validé.
@@ -171,8 +169,8 @@ type Activity struct {
 	SubjectRich   interface{} `json:"subject_rich"`
 	SubjectParams []string    `json:"subject_params"`
 	ObjectType    string      `json:"object_type"`
-	ObjectID      int      `json:"object_id"`
+	ObjectID      int         `json:"object_id"`
 	ObjectName    string      `json:"object_name"`
-	Time          time.Time      `json:"time"`
+	Time          time.Time   `json:"time"`
 	Owner         string      `json:"owner"`
 }

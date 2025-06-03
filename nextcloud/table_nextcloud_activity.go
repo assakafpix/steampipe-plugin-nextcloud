@@ -39,7 +39,6 @@ func tableNextcloudActivity() *plugin.Table {
 			{Name: "app", Type: proto.ColumnType_STRING, Description: "Originating app", Transform: transform.FromField("App")},
 			{Name: "type", Type: proto.ColumnType_STRING, Description: "Activity type", Transform: transform.FromField("Type")},
 			{Name: "subject", Type: proto.ColumnType_STRING, Description: "Unformatted subject", Transform: transform.FromField("Subject")},
-			// subject_rich est maintenant exposé en JSON (car c’est parfois un tableau).
 			{Name: "subject_rich", Type: proto.ColumnType_JSON, Description: "Subject contains HTML (raw JSON)", Transform: transform.FromField("SubjectRich")},
 			{Name: "subject_params", Type: proto.ColumnType_JSON, Description: "Parameters for rich subject", Transform: transform.FromField("SubjectParams")},
 			{Name: "object_type", Type: proto.ColumnType_STRING, Description: "Type of object acted upon", Transform: transform.FromField("ObjectType")},

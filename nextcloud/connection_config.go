@@ -171,6 +171,6 @@ type Activity struct {
 	ObjectType    string      `json:"object_type"`
 	ObjectID      int         `json:"object_id"`
 	ObjectName    string      `json:"object_name"`
-	Time          time.Time   `json:"time"`
+	Time          time.Time   `json:"datetime"`
 	Owner         string      `json:"owner"`
 }

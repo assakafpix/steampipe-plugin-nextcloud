@@ -1,7 +1,7 @@
 package main
 
 import (
-    "steampipe-plugin-nextcloud/nextcloud"
+    "github.com/assakafpix/steampipe-plugin-nextcloud/nextcloud"
     "github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 )
 

@@ -13,19 +13,20 @@ import (
 
 // ocsShare represents a single share object from the Files Sharing API
 type ocsShare struct {
-	ID           string  `json:"id"`
-	ShareType    int     `json:"share_type"`
-	ShareWith    string  `json:"share_with"`
-	Path         string  `json:"path"`
-	Permissions  int     `json:"permissions"`
-	Password     *string `json:"password"`
-	PublicUpload bool    `json:"public_upload"`
-	ExpireDate   *string `json:"expire_date"`
-	URL          string  `json:"url"`
-	UIDOwner     string  `json:"uid_owner"`
-	Owner        string  `json:"displayname_owner"`
-	TimeCreated  int     `json:"stime"`
-	TimeModified  int     `json:"item_mtime"`
+	ID                    string  `json:"id"`
+	ShareType             int     `json:"share_type"`
+	ShareWith             string  `json:"share_with"`
+	ShareWithDisplayName  string  `json:"share_with_displayname"`
+	Path                  string  `json:"path"`
+	Permissions           int     `json:"permissions"`
+	Password              *string `json:"password"`
+	PublicUpload          bool    `json:"public_upload"`
+	ExpireDate            *string `json:"expire_date"`
+	URL                   string  `json:"url"`
+	UIDOwner              string  `json:"uid_owner"`
+	Owner                 string  `json:"displayname_owner"`
+	TimeCreated           int     `json:"stime"`
+	TimeModified          int     `json:"item_mtime"`
 }
 
 // ocsShareListResponse wraps the JSON envelope for the Shares API list
@@ -60,7 +61,8 @@ func tableNextcloudShare() *plugin.Table {
 			{Name: "time_created", Type: proto.ColumnType_INT, Description: "Creation time of the share", Transform: transform.FromField("TimeCreated")},
 			{Name: "time_modified", Type: proto.ColumnType_INT, Description: "Modified time of the share", Transform: transform.FromField("TimeModified")},
 			{Name: "expire_date", Type: proto.ColumnType_STRING, Description: "Expiration date of the share, if set", Transform: transform.FromField("ExpireDate")},
-			{Name: "share_with", Type: proto.ColumnType_STRING, Description: "User or group the resource is shared with", Transform: transform.FromField("ShareWith")},
+			{Name: "share_with", Type: proto.ColumnType_STRING, Description: "UserID or groupID the resource is shared with", Transform: transform.FromField("ShareWith")},
+			{Name: "share_with_displayname", Type: proto.ColumnType_STRING, Description: "User or group the resource is shared with", Transform: transform.FromField("ShareWithDisplayName")},
 			{Name: "share_type", Type: proto.ColumnType_INT, Description: "Type of the share (0=user, 3=public link)", Transform: transform.FromField("ShareType")},
 			{Name: "permissions", Type: proto.ColumnType_INT, Description: "Permission mask", Transform: transform.FromField("Permissions")},
 			{Name: "public_upload", Type: proto.ColumnType_BOOL, Description: "Whether public upload is allowed", Transform: transform.FromField("PublicUpload")},

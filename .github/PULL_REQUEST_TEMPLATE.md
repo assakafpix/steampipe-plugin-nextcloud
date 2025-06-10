@@ -1,17 +1,15 @@
-# Integration test logs
-<details>
-  <summary>Logs</summary>
+## 🔆 Problem
 
-```
-Add passing integration test logs here
-```
-</details>
+<!-- Describe here the need or problem addressed by this Pull Request. -->
 
-# Example query results
-<details>
-  <summary>Results</summary>
+## ⛱️ Proposition
 
-```
-Add example SQL query results here (please include the input queries as well)
-```
-</details>
+<!-- Add here if needed, details regarding the choosen technical, problems or difficulties encountered. -->
+
+## 🌊 Remarks
+
+<!-- Any additional info, tips or tricks ? -->
+
+## 🏄 Testing
+
+<!-- How to reproduce the issue, which test profiles, what specific actions needed to test, etc. -->

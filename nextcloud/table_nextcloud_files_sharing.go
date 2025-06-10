@@ -23,7 +23,9 @@ type ocsShare struct {
 	ExpireDate   *string `json:"expire_date"`
 	URL          string  `json:"url"`
 	UIDOwner     string  `json:"uid_owner"`
+	Owner        string  `json:"displayname_owner"`
 	TimeCreated  int     `json:"stime"`
+	TimeModified  int     `json:"item_mtime"`
 }
 
 // ocsShareListResponse wraps the JSON envelope for the Shares API list
@@ -53,15 +55,18 @@ func tableNextcloudShare() *plugin.Table {
 		Columns: []*plugin.Column{
 			{Name: "id", Type: proto.ColumnType_INT, Description: "Share ID", Transform: transform.FromField("ID")},
 			{Name: "path", Type: proto.ColumnType_STRING, Description: "Path of the shared object", Transform: transform.FromField("Path")},
+			{Name: "name_owner", Type: proto.ColumnType_STRING, Description: "Name of the owner", Transform: transform.FromField("Owner")},
 			{Name: "password", Type: proto.ColumnType_STRING, Description: "Password protecting the share, if any", Transform: transform.FromField("Password")},
-			{Name: "expire_date", Type: proto.ColumnType_TIMESTAMP, Description: "Expiration date of the share, if set", Transform: transform.FromField("ExpireDate")},
+			{Name: "time_created", Type: proto.ColumnType_INT, Description: "Creation time of the share", Transform: transform.FromField("TimeCreated")},
+			{Name: "time_modified", Type: proto.ColumnType_INT, Description: "Modified time of the share", Transform: transform.FromField("TimeModified")},
+			{Name: "expire_date", Type: proto.ColumnType_STRING, Description: "Expiration date of the share, if set", Transform: transform.FromField("ExpireDate")},
 			{Name: "share_with", Type: proto.ColumnType_STRING, Description: "User or group the resource is shared with", Transform: transform.FromField("ShareWith")},
 			{Name: "share_type", Type: proto.ColumnType_INT, Description: "Type of the share (0=user, 3=public link)", Transform: transform.FromField("ShareType")},
 			{Name: "permissions", Type: proto.ColumnType_INT, Description: "Permission mask", Transform: transform.FromField("Permissions")},
 			{Name: "public_upload", Type: proto.ColumnType_BOOL, Description: "Whether public upload is allowed", Transform: transform.FromField("PublicUpload")},
 			{Name: "url", Type: proto.ColumnType_STRING, Description: "Public URL of the share", Transform: transform.FromField("URL")},
 			{Name: "owner", Type: proto.ColumnType_STRING, Description: "Owner of the share", Transform: transform.FromField("UIDOwner")},
-			{Name: "time_created", Type: proto.ColumnType_INT, Description: "Creation time of the share", Transform: transform.FromField("TimeCreated")},
+			
 		},
 	}
 }

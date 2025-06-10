@@ -158,19 +158,3 @@ func GetConfig(conn *plugin.Connection) *NextcloudConfig {
 func GetClient(ctx context.Context, conn *plugin.Connection) (*NextcloudClient, error) {
 	return NewNextcloudClient(ctx, conn)
 }
-
-// Activity représente une entrée d’activité depuis l’API Activity de Nextcloud.
-// On déclare SubjectRich comme interface{} pour accepter un tableau ou un bool selon la version de Nextcloud.
-type Activity struct {
-	ID            int         `json:"id,string"`
-	App           string      `json:"app"`
-	Type          string      `json:"type"`
-	Subject       string      `json:"subject"`
-	SubjectRich   interface{} `json:"subject_rich"`
-	SubjectParams []string    `json:"subject_params"`
-	ObjectType    string      `json:"object_type"`
-	ObjectID      int         `json:"object_id"`
-	ObjectName    string      `json:"object_name"`
-	Time          time.Time   `json:"datetime"`
-	Owner         string      `json:"owner"`
-}

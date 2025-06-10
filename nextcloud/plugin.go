@@ -18,6 +18,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
         DefaultTransform: transform.FromGo().NullIfZero(),
         TableMap: map[string]*plugin.Table{
             "nextcloud_activity": tableNextcloudActivity(),
+            "nextcloud_share": tableNextcloudShare(),
         },
     }
 

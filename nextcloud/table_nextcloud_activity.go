@@ -4,13 +4,31 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strconv"
+	"time"
 
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
 )
 
-// ocsActivityListResponse wrappe l’enveloppe JSON renvoyée par l’API Activity.
+// Activity représente une entrée d'activité depuis l'API Activity de Nextcloud.
+// On déclare SubjectRich comme interface{} pour accepter un tableau ou un bool selon la version de Nextcloud.
+type Activity struct {
+	ActivityID    int64       `json:"activity_id"`
+	App           string      `json:"app"`
+	Type          string      `json:"type"`
+	Subject       string      `json:"subject"`
+	SubjectRich   interface{} `json:"subject_rich"`
+	SubjectParams []string    `json:"subject_params"`
+	ObjectType    string      `json:"object_type"`
+	ObjectID      int         `json:"object_id"`
+	ObjectName    string      `json:"object_name"`
+	Time          time.Time   `json:"datetime"`
+	User          string      `json:"user"`
+}
+
+// ocsActivityListResponse wrappe l'enveloppe JSON renvoyée par l'API Activity.
 type ocsActivityListResponse struct {
 	Ocs struct {
 		Meta struct {
@@ -35,22 +53,23 @@ func tableNextcloudActivity() *plugin.Table {
 			Hydrate:    getActivity,
 		},
 		Columns: []*plugin.Column{
-			{Name: "id", Type: proto.ColumnType_INT, Description: "Activity ID", Transform: transform.FromField("ID")},
+			{Name: "id", Type: proto.ColumnType_STRING, Description: "Activity ID", Transform: transform.FromField("ActivityID").Transform(transform.ToString)},
 			{Name: "app", Type: proto.ColumnType_STRING, Description: "Originating app", Transform: transform.FromField("App")},
 			{Name: "type", Type: proto.ColumnType_STRING, Description: "Activity type", Transform: transform.FromField("Type")},
 			{Name: "subject", Type: proto.ColumnType_STRING, Description: "Unformatted subject", Transform: transform.FromField("Subject")},
-			{Name: "subject_rich", Type: proto.ColumnType_JSON, Description: "Subject contains HTML (raw JSON)", Transform: transform.FromField("SubjectRich")},
+			{Name: "time", Type: proto.ColumnType_TIMESTAMP, Description: "Timestamp of the activity", Transform: transform.FromField("Time")},
+			//{Name: "subject_rich", Type: proto.ColumnType_JSON, Description: "Subject contains HTML (raw JSON)", Transform: transform.FromField("SubjectRich")},
 			{Name: "subject_params", Type: proto.ColumnType_JSON, Description: "Parameters for rich subject", Transform: transform.FromField("SubjectParams")},
 			{Name: "object_type", Type: proto.ColumnType_STRING, Description: "Type of object acted upon", Transform: transform.FromField("ObjectType")},
 			{Name: "object_id", Type: proto.ColumnType_INT, Description: "ID of the object", Transform: transform.FromField("ObjectID")},
 			{Name: "object_name", Type: proto.ColumnType_STRING, Description: "Name of the object", Transform: transform.FromField("ObjectName")},
-			{Name: "time", Type: proto.ColumnType_TIMESTAMP, Description: "Timestamp of the activity", Transform: transform.FromField("Time")},
-			{Name: "owner", Type: proto.ColumnType_STRING, Description: "User who performed the action", Transform: transform.FromField("Owner")},
+			
+			{Name: "user", Type: proto.ColumnType_STRING, Description: "User who performed the action", Transform: transform.FromField("User")},
 		},
 	}
 }
 
-// listActivity appelle l’endpoint OCS pour lister toutes les activités.
+// listActivity appelle l'endpoint OCS pour lister toutes les activités.
 func listActivity(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	// Construire le client à partir de d.Connection
 	client, err := GetClient(ctx, d.Connection)
@@ -68,7 +87,7 @@ func listActivity(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 	}
 	defer resp.Body.Close()
 
-	// Décodage de l’enveloppe JSON
+	// Décodage de l'enveloppe JSON
 	var result ocsActivityListResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
 		return nil, fmt.Errorf("échec du décodage JSON Nextcloud Activity : %w", err)
@@ -79,11 +98,11 @@ func listActivity(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateDat
 		return nil, fmt.Errorf("erreur OCS API : %s (code : %d)", result.Ocs.Meta.Message, result.Ocs.Meta.StatusCode)
 	}
 
-	// Si un filtre "user_id = X" est présent, on ne diffuse que les activités correspondant à owner == userID
+	// Si un filtre "user_id = X" est présent, on ne diffuse que les activités correspondant à user == userID
 	if qual := d.EqualsQuals["user_id"]; qual != nil {
 		userID := qual.GetStringValue()
 		for _, activity := range result.Ocs.Data {
-			if activity.Owner == userID {
+			if activity.User == userID {
 				d.StreamListItem(ctx, activity)
 			}
 		}
@@ -104,14 +123,20 @@ func getActivity(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 	if qual == nil {
 		return nil, fmt.Errorf("id qualifier not provided")
 	}
-	id := qual.GetInt64Value()
-
+	id := qual.GetStringValue()
+	
+	// Conversion de l'ID string en int64 pour la comparaison
+	idInt, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		return nil, fmt.Errorf("invalid ID format: %s", id)
+	}
+	
 	// Construire le client Nextcloud
 	client, err := GetClient(ctx, d.Connection)
 	if err != nil {
 		return nil, err
 	}
-
+	
 	// Récupérer toutes les activités (filtrage côté client)
 	endpoint := "ocs/v2.php/apps/activity/api/v2/activity?format=json"
 	resp, err := client.MakeRequest(ctx, "GET", endpoint, nil)
@@ -119,23 +144,24 @@ func getActivity(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 		return nil, err
 	}
 	defer resp.Body.Close()
-
-	// Décodage de l’enveloppe JSON
+	
+	// Décodage de l'enveloppe JSON
 	var result ocsActivityListResponse
 	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
 		return nil, fmt.Errorf("échec du décodage JSON Nextcloud Activity : %w", err)
 	}
+	
 	if result.Ocs.Meta.Status != "ok" {
 		return nil, fmt.Errorf("OCS API error: %s (code: %d)", result.Ocs.Meta.Message, result.Ocs.Meta.StatusCode)
 	}
-
-	// Recherche de l’activité dont l’ID correspond
+	
+	// Recherche de l'activité dont l'ID correspond
 	for _, activity := range result.Ocs.Data {
-		if int64(activity.ID) == id {
+		if activity.ActivityID == idInt {
 			return activity, nil
 		}
 	}
-
+	
 	// Si aucune activité trouvée
-	return nil, fmt.Errorf("activity with ID %d not found", id)
+	return nil, fmt.Errorf("activity with ID %s not found", id)
 }

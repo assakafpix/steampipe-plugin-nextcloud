@@ -1,17 +1,7 @@
-# Integration test logs
-<details>
-  <summary>Logs</summary>
+# Contexte
 
-```
-Add passing integration test logs here
-```
-</details>
+# Problème
 
-# Example query results
-<details>
-  <summary>Results</summary>
+# Proposition
 
-```
-Add example SQL query results here (please include the input queries as well)
-```
-</details>
+# Pour tester

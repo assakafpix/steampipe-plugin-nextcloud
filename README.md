@@ -11,7 +11,7 @@ Query your Nextcloud instance with SQL using [Steampipe](https://steampipe.io).
 ### Clone
 
 ```bash
-git clone https://github.com/assakafpix/steampipe-plugin-nextcloud.git
+git clone git@github.com:assakafpix/steampipe-plugin-nextcloud.git
 cd steampipe-plugin-nextcloud
 ```
 
@@ -41,6 +41,6 @@ steampipe query
 
 Check activity:
 ```sql
-select * from nextcloud_activity;
+select * from nextcloud_activity order by time desc;
 ```
 
